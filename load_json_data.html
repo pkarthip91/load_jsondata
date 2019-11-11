@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Load JSON Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        html,
+        body,
+        #root {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f5f9;
+        }
+
+        .box-center {
+            transform: translate(0%, 50%);
+        }
+
+        .table-inside {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            border: 1px solid #fdfdfd;
+            box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
+            padding: 8px;
+            display: inline-block;
+            width: 100%;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="box-center">
+            <div class="text-center">
+                <h4>Sample Table</h4>
+            </div>
+            <div class="text-para">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing  </p>
+            </div>
+            <div class="load-btn float-right mb-4">
+                <button id="getAllData" type="button" class="btn btn-primary">Load Data</button>
+            </div>
+            <div class="table-inside">
+                <table id="sampleTable" class="table" width="100%">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Url</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#getAllData").one('click', function (event) {
+                $.ajax({
+                    url: "https://aimtell.com/files/sites.json",
+                    dataType: 'json',
+                    type: 'get',
+                    cache: false,
+                    success: function (data) {
+                        var dataVal = '';
+                        $.map(data.sites, function (val, key) {
+                            dataVal += '<tr>';
+                            dataVal += '<td>' + val.id + '</td>';
+                            dataVal += '<td>' + val.name + '</td>';
+                            dataVal += '<td>' + val.url + '</td>';
+                            dataVal += '</tr>';
+                        });
+                        $("#sampleTable").append(dataVal);
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
