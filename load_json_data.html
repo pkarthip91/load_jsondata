@@ -27,7 +27,7 @@
         }
 
         .box-center {
-            transform: translate(0%, 50%);
+          padding: 80px;
         }
 
         .table-inside {
@@ -40,6 +40,12 @@
             width: 100%;
             background: #fff;
         }
+		
+		@media only screen and (max-width: 600px) {
+		 .box-center {
+          padding: 80px;
+        }
+		}
     </style>
 </head>
 
@@ -77,7 +83,7 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
-            $("#getAllData").one('click', function (event) {
+            $("#getAllData").on('click', function (event) {
                 $.ajax({
                     url: "https://aimtell.com/files/sites.json",
                     dataType: 'json',
